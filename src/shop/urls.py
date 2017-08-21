@@ -1,12 +1,12 @@
 from django.conf.urls import url
-from .views import views_product, views_list_product, views_order, SuccessOrder
+from .views import ProductView, ProductListView, OrderView, SuccessOrder
 
 
 app_name = 'shop'
 
 urlpatterns = [
-    url(r'^products/$', views_list_product, name="products"),
-    url(r'^product/(?P<slug>[\w-]+)/$', views_product, name="product"),
-    url(r'^order/(?P<slug>[\w-]+)/$', views_order, name="order"),
+    url(r'^products/$', ProductListView.as_view(), name="products"),
+    url(r'^product/(?P<slug>[\w-]+)/$', ProductView.as_view(), name="product"),
     url(r'^order-seccuss/$', SuccessOrder.as_view(), name='order-seccuss'),
+    url(r'^order/(?P<slug>[\w-]+)/$', OrderView.as_view(), name="order"),
 ]
