@@ -1,5 +1,7 @@
 from django.db import models
 from django.core.validators import MinValueValidator, MaxValueValidator
+from django.conf import settings
+import os
 # Create your models here.
 
 STATUS = (
@@ -10,12 +12,13 @@ STATUS = (
 
 
 class Product(models.Model):
-
+    
     name = models.CharField(max_length=150, verbose_name="Название")
     slug = models.SlugField(unique=True, verbose_name="URL")
     description = models.TextField(max_length=500, verbose_name="Описание", blank=True)
     price = models.IntegerField(verbose_name="Стоимость")
-    photo = models.ImageField(verbose_name="Фото")
+    photo = models.ImageField(verbose_name="Фото",
+                        default=os.path.join(settings.MEDIA_ROOT, "not_img"))
 
     class Meta:
         verbose_name = 'Товар'
